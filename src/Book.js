@@ -30,7 +30,7 @@ export function Book(title, year, publicationBy, authors) {
             return this.authors.reduce((accum, { books }) => {
                 const allBooks = books.filter((book) => book !== this);
                 return [...new Set([...accum, ...allBooks])];
-            }, []).join(', ');
+            }, []).map(({title}) => title).join(', ');
         }
     });
 
@@ -40,7 +40,7 @@ export function Book(title, year, publicationBy, authors) {
                 const users = books.filter((user) => user !== this.publicationBy).map(({ name }) => name);
 
                 return [...new Set([...accum, ...users])]
-            }, []).join(', ');
+            }, []).map(({name}) => name).join(', ');
         }
     });
 }
