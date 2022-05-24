@@ -37,7 +37,7 @@ export function Book(title, year, publicationBy, authors) {
     Object.defineProperty(this, 'suggestedPublicators', {
         get() {
             return this.authors.reduce((accum, { books }) => {
-                const users = books.filter((user) => user !== this.publicationBy).map(({ name }) => name);
+                const users = books.filter(({publicationBy}) => publicationBy !== this.publicationBy).map(({ name }) => name);
 
                 return [...new Set([...accum, ...users])]
             }, []).map(({name}) => name).join(', ');
